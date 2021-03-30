@@ -1,0 +1,226 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Proiect.master.cs" Inherits="Proiect.Proiect" %>
+
+<!DOCTYPE html>
+
+<html>
+<head runat="server">
+    <meta charset="utf-8" />
+    <title><%: Page.Title %></title>
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+
+    <style type="text/css">
+        .imgFrame {
+            width: auto;
+            padding: 10px;
+            background: #FFF;
+            box-shadow: 0px 0px 2px 2px #C8C8C8;
+            box-sizing: border-box;
+            -moz-box-sizing: border-box;
+        }
+
+        .body-content {
+            padding-left: 15px;
+            padding-right: 15px;
+        }
+
+        #menu {
+            z-index: 1000;
+        }
+
+            #menu ul {
+                list-style: none;
+                z-index: 1000;
+            }
+
+                #menu ul li {
+                    width: 150px;
+                    height: 35px;
+                    line-height: 35px;
+                    text-align: center;
+                    float: left;
+                    position: relative;
+                }
+
+                    #menu ul li a {
+                        text-decoration: none;
+                        font-weight: bold;
+                        color: ghostwhite;
+                        display: block;
+                    }
+
+                        #menu ul li a:hover {
+                            background-color: #7FCEC5;
+                            text-decoration: underline;
+                            height: 35px;
+                        }
+
+                /*Second UL*/
+                #menu ul ul {
+                    position: absolute;
+                    display: none;
+                }
+
+                #menu ul li:hover > ul {
+                    display: block;
+                    margin-left: -40px;
+                }
+
+        /*#menu ul li:hover > ul li {
+                    background-color: #4c4177;
+                    background-image: linear-gradient(315deg, #4c4177 0%, #2a5470 74%);
+                    height: 35px;
+                }*/
+
+        .active {
+            background-color: #7FCEC5;
+            height: 35px;
+        }
+
+        .pTest {
+            background-color: #4c4177;
+            background-image: linear-gradient(315deg, #4c4177 0%, #2a5470 74%);
+            height: 35px;
+        }
+
+        #menu ul ul li a p:hover {
+            background-color: #7FCEC5;
+            background-image: none;
+            height: 35px;
+        }
+
+        .fixed-top {
+            position: fixed;
+            top: 0;
+            width: 75%;
+            z-index: 1000;
+        }
+    </style>
+    <link href="Content/bootstrap.min.css" rel="stylesheet" />
+</head>
+
+<body style="background-color: aliceblue;">
+    <form id="form1" runat="server">
+        <asp:ScriptManager ID="ScriptManager1" runat="server">
+            <Scripts>
+                <%--To learn more about bundling scripts in ScriptManager see https://go.microsoft.com/fwlink/?LinkID=301884 --%>
+                <%--Framework Scripts--%>
+                <asp:ScriptReference Name="MsAjaxBundle" />
+                <asp:ScriptReference Name="jquery" />
+                <asp:ScriptReference Name="bootstrap" />
+                <asp:ScriptReference Name="WebForms.js" Assembly="System.Web" Path="~/Scripts/WebForms/WebForms.js" />
+                <asp:ScriptReference Name="WebUIValidation.js" Assembly="System.Web" Path="~/Scripts/WebForms/WebUIValidation.js" />
+                <asp:ScriptReference Name="MenuStandards.js" Assembly="System.Web" Path="~/Scripts/WebForms/MenuStandards.js" />
+                <asp:ScriptReference Name="GridView.js" Assembly="System.Web" Path="~/Scripts/WebForms/GridView.js" />
+                <asp:ScriptReference Name="DetailsView.js" Assembly="System.Web" Path="~/Scripts/WebForms/DetailsView.js" />
+                <asp:ScriptReference Name="TreeView.js" Assembly="System.Web" Path="~/Scripts/WebForms/TreeView.js" />
+                <asp:ScriptReference Name="WebParts.js" Assembly="System.Web" Path="~/Scripts/WebForms/WebParts.js" />
+                <asp:ScriptReference Name="Focus.js" Assembly="System.Web" Path="~/Scripts/WebForms/Focus.js" />
+                <asp:ScriptReference Name="WebFormsBundle" />
+                <%--Site Scripts--%>
+            </Scripts>
+        </asp:ScriptManager>
+
+        <div class="container">
+            <div style="background-color: cornflowerblue; border-radius: 12px;">
+                <h1 style="color: ghostwhite; text-align: center; padding-top: 5px;">Proiect ASP.NET Aplicatie Salarizare - Avram Denis</h1>
+
+                <asp:UpdatePanel ID="UpdatePanel1" runat="server">
+                    <ContentTemplate>
+                        <table style="width: 100%;">
+                            <tr>
+                                <td style="text-align: right; width: 50%; padding: 5px;">
+                                    <asp:Image ID="Image1" runat="server" Height="200px" CssClass="imgFrame" />
+                                </td>
+                                <td style="padding: 5px;">
+                                    <asp:Image ID="Image2" runat="server" Height="200px" CssClass="imgFrame" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2" style="padding-top: 5px;">
+                                    <h4 style="text-align: center; color: ghostwhite;">
+                                        <asp:Label ID="LabelDataOra" runat="server" Text="Label"></asp:Label>
+                                    </h4>
+                                </td>
+                            </tr>
+                        </table>
+                        <asp:Timer ID="Timer1" runat="server" Interval="3000" OnTick="Timer1_Tick"></asp:Timer>
+                    </ContentTemplate>
+                </asp:UpdatePanel>
+
+                <div id="menu" style="background-color: #4c4177; background-image: linear-gradient(315deg, #4c4177 0%, #2a5470 74%); height: 35px;">
+                    <ul>
+                        <li id="pageHome" runat="server">
+                            <a href="Home.aspx">Home</a>
+                        </li>
+                        <li id="pageInDate" runat="server">
+                            <a href="#">Introducere date</a>
+                            <ul>
+                                <li>
+                                    <a href="ActualizareDate.aspx">
+                                        <p id="pageInActualizareDate" runat="server" class="pTest">Actualizare date</p>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="AdaugareAngajati.aspx">
+                                        <p id="pageInAdaugareAngajati" runat="server" class="pTest">Adaugare angajati</p>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="StergereAngajati.aspx">
+                                        <p id="pageInStergereAngajati" runat="server" class="pTest">Stergere angajati</p>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li id="pageTiparire" runat="server">
+                            <a href="#">Tiparire</a>
+                            <ul>
+                                <li>
+                                    <a href="StatPlata.aspx">
+                                        <p id="pageTiparireStatePlata" runat="server" class="pTest">Stat plata</p>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="Fluturasi.aspx">
+                                        <p id="pageTiparireFluturasi" runat="server" class="pTest">Fluturasi</p>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li id="pageModificareProcente" runat="server">
+                            <a href="ModificareProcente.aspx">Modificare procente</a>
+                        </li>
+                    </ul>
+                </div>
+                <script type="text/javascript">
+                    ///////////////// fixed menu on scroll for desktop
+                    if ($(window).width() > 992) {
+                        $(window).scroll(function () {
+                            if ($(this).scrollTop() > 345) {
+                                $('#menu').addClass("fixed-top");
+                                // add padding top to show content behind navbar
+                                $('body').css('padding-top', 35 + 'px');
+                            } else {
+                                $('#menu').removeClass("fixed-top");
+                                // remove padding top from body
+                                $('body').css('padding-top', '0');
+                            }
+                        });
+                    } // end if
+                </script>
+
+            </div>
+        </div>
+
+        <div class="container body-content">
+            <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+            </asp:ContentPlaceHolder>
+            <hr />
+            <footer>
+                <p style="text-align: center;">&copy; Copyright <%: DateTime.Now.Year %> Avram Denis </p>
+            </footer>
+        </div>
+    </form>
+</body>
+</html>
